@@ -1,0 +1,290 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4 {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Navbar Styles */
+.navbar-container {
+    /* background-color: #f8f9fa; */
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+   
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.navbar-items, .navbar-btn {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar-btn button {
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+/* Homepage Section Styles */
+.homePage-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.homepage-content {
+    flex: 1 1 45%;
+    text-align: center;
+}
+
+.homepage-content img {
+    border-radius: 10px;
+}
+
+/* Social Section */
+.social {
+    text-align: center;
+    padding: 20px;
+}
+
+.social-content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.social-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Volunteer Section */
+.homePage2-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+    text-align: center;
+}
+
+.homePage2-content img {
+    border-radius: 10px;
+    flex: 1 1 45%;
+}
+
+/* Foundation Section */
+
+.homePage3-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 20px;
+    background: linear-gradient(141deg, #96a3c3, #a0b8bb);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgb(32 126 151);
+}
+
+.homepage3-items {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    flex: 1 1 100%;
+}
+
+.homepage3-items h3{
+    font-size: 20px;
+}
+
+.homepage3-img {
+    flex: 1 1 45%;
+    border-radius: 10px;
+}
+
+.homepage3-heading {
+    flex: 1 1 50%;
+}
+
+/* Testimonials Section */
+/* .homePage4 {
+    text-align: center;
+    padding: 20px;
+}
+
+.homepage4-cart {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.homepage4-carts {
+    flex: 1 1 30%;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.homepage4-carts img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+} */
+
+/* review slider css  */
+
+
+
+
+
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .navbar {
+        flex-direction: column;
+    }
+
+    .navbar-items, .navbar-btn {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .homePage-container, .homePage2-content {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .homepage-content {
+        flex: 1 1 100%;
+    }
+
+    .social-content {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .homePage3-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .homepage3-items {
+        flex-direction: column;
+    }
+
+    .homepage3-heading {
+        text-align: center;
+    }
+
+    /* .homepage4-carts {
+        flex: 1 1 100%;
+    } */
+}
+
+
+/* Responsive Styles for Mobile (576px and Below) */
+@media (max-width: 400px) {
+    .navbar {
+        padding: 10px;
+        flex-direction: column;
+    }
+
+    .navbar-items, .navbar-btn {
+        gap: 10px;
+    }
+
+    .homePage-container {
+        padding: 10px;
+    }
+
+    .homepage-content img {
+        width: 100%;
+    }
+
+    .social-content {
+        gap: 10px;
+    }
+
+    .homePage2-content {
+        padding: 10px;
+    }
+
+    .homePage3-content {
+        gap: 15px;
+    }
+
+    .homepage3-img {
+        width: 100%;
+    }
+
+    .homepage3-heading h1 {
+        font-size: 20px;
+    }
+
+    .homepage3-heading h3 {
+        font-size: 16px;
+    }
+
+    .homePage4 {
+        padding: 10px;
+    }
+
+    .homepage4-carts {
+        padding: 10px;
+    }
+
+    button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .social-img {
+        width: 100px;
+        height: 100px;
+    }
+}

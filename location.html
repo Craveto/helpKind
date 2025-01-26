@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Find Nearby Foundations</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Find Foundations Near You</h1>
+    <button id="locationButton">Find Nearby Foundations</button>
+    <div id="map"></div>
+
+    <script>
+        // Initialize map
+        const map = L.map('map').setView([19.0760, 72.8777], 13); // Default to Mumbai
+        let userMarker = null;
+
+        // Load OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        // Add marker for user's location
+        const addUserMarker = (lat, lng) => {
+            if (userMarker) map.removeLayer(userMarker); // Remove existing marker
+            userMarker = L.marker([lat, lng]).addTo(map).bindPopup("Your Location").openPopup();
+        };
+
+        // Add markers for foundations
+        const addFoundationMarkers = (foundations) => {
+            foundations.forEach(foundation => {
+                const marker = L.marker([foundation.latitude, foundation.longitude]).addTo(map);
+                marker.bindPopup(`
+                    <strong>${foundation.name}</strong><br>
+                    ${foundation.description}<br>
+                    Distance: ${foundation.distance.toFixed(2)} km
+                `);
+            });
+        };
+
+        // Fetch and display foundations
+        const fetchFoundations = async (lat, lng, radius) => {
+            try {
+                const response = await fetch(`/helpKind/location.jsp?lat=${lat}&lng=${lng}&radius=${radius}`);
+                if (!response.ok) throw new Error("Failed to fetch data from the server.");
+
+                const foundations = await response.json();
+
+                if (foundations.length === 0) {
+                    alert("No foundations found within the specified radius.");
+                    return;
+                }
+
+                addFoundationMarkers(foundations); // Add foundation markers to the map
+            } catch (error) {
+                console.error("Error fetching foundations:", error);
+                alert("Failed to fetch foundations. Please try again.");
+            }
+        };
+
+        // Handle "Find Nearby Foundations" button click
+        document.getElementById('locationButton').addEventListener('click', () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const userLat = position.coords.latitude;
+                    const userLng = position.coords.longitude;
+                    const radius = 10; // Radius in kilometers
+
+                    map.setView([userLat, userLng], 13); // Center the map on the user's location
+                    addUserMarker(userLat, userLng); // Add marker for the user's location
+
+                    // Fetch and display nearby foundations
+                    fetchFoundations(userLat, userLng, radius);
+                }, error => {
+                    console.error("Geolocation error:", error);
+                    alert("Unable to get your location. Please allow location access.");
+                });
+            } else {
+                alert("Geolocation is not supported by your browser.");
+            }
+        });
+    </script>
+</body>
+
+</html>

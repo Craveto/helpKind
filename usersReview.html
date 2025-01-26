@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user review</title>
+
+    <style>
+        .homepage4-items {
+            text-align: center;
+            margin: 20px;
+            padding: 20px;
+            background:linear-gradient(141deg, #96a3c3, #a0b8bb);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgb(32 126 151);
+        }
+    
+        .homepage4-slider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            width: 80%;
+            margin: 0 auto;
+            position: relative;
+        }
+    
+        .slider-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+            overflow: hidden;
+        }
+    
+        .homepage4-carts {
+            display: none;
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            background: #d0e6ec;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            margin: 0 10px;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: scale(0.9);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+    
+        .homepage4-carts.active {
+            display: block;
+            transform: scale(1);
+            opacity: 1;
+        }
+    
+        .cart-items {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+    
+        .cart-items img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 2px solid #007BFF;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    
+        .cart-heading h1 {
+            font-size: 1.2rem;
+            color: #333;
+        }
+    
+        .cart-heading h4 {
+            font-size: 1rem;
+            color: #666;
+        }
+    
+        h3 {
+            font-size: 1.1rem;
+            color: #444;
+            font-style: italic;
+        }
+    
+        #reviewButton {
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+    
+        #reviewButton:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+    
+        #prevButton, #nextButton {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            margin: 0 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+    
+        #prevButton:hover, #nextButton:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.1);
+        }
+    
+        @media (max-width: 768px) {
+            .homepage4-carts {
+                padding: 15px;
+            }
+    
+            .cart-items img {
+                width: 50px;
+                height: 50px;
+            }
+    
+            h3 {
+                font-size: 1rem;
+            }
+    
+            #reviewButton {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <section class="homePage4"> 
+        <div class="homepage4-items">
+            <h1>What our users say..</h1>
+    
+            <div class="homepage4-slider">
+                <button id="prevButton">&#8592;</button>
+                <div class="slider-container">
+                    <div class="homepage4-carts active">
+                        <div class="cart-items">
+                            <img src="img/profileImg1.png" alt="User Profile">
+                            <div class="cart-heading">
+                                <h1>Omkar Garud</h1>
+                                <h4>@omkar_garud11</h4>
+                            </div>
+                        </div>
+                        <h3>From this platform I got my day worth it...</h3>
+                    </div>
+    
+                    <div class="homepage4-carts">
+                        <div class="cart-items">
+                            <img src="img/profileImg2.png" alt="User Profile">
+                            <div class="cart-heading">
+                                <h1>Jane Doe</h1>
+                                <h4>@jane_doe12</h4>
+                            </div>
+                        </div>
+                        <h3>This is an amazing platform that I always rely on!</h3>
+                    </div>
+    
+                    <div class="homepage4-carts">
+                        <div class="cart-items">
+                            <img src="img/profileImg3.png" alt="User Profile">
+                            <div class="cart-heading">
+                                <h1>John Smith</h1>
+                                <h4>@john_smith</h4>
+                            </div>
+                        </div>
+                        <h3>Highly recommend it to everyone!</h3>
+                    </div>
+                </div>
+                <button id="nextButton">&#8594;</button>
+            </div>
+    
+            <button id="reviewButton">Give Review</button>
+        </div>
+    </section>
+    
+    <script>
+        // Initialize slider functionality
+        const sliderContainer = document.querySelector('.slider-container');
+        const sliderItems = document.querySelectorAll('.homepage4-carts');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        let currentIndex = 0;
+    
+        function updateSlider() {
+            sliderItems.forEach((item, index) => {
+                item.classList.toggle('active', index === currentIndex);
+            });
+        }
+    
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + sliderItems.length) % sliderItems.length;
+            updateSlider();
+        });
+    
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % sliderItems.length;
+            updateSlider();
+        });
+    
+        // Add review functionality
+        const reviewButton = document.getElementById('reviewButton');
+        reviewButton.addEventListener('click', () => {
+            const userName = prompt("Enter your name:");
+            const userHandle = prompt("Enter your handle (e.g., @your_handle):");
+            const userReview = prompt("Enter your review:");
+    
+            if (userName && userHandle && userReview) {
+                const newReview = document.createElement('div');
+                newReview.classList.add('homepage4-carts');
+                newReview.innerHTML = `
+                    <div class="cart-items">
+                        <img src="img/defaultProfile.png" alt="User Profile">
+                        <div class="cart-heading">
+                            <h1>${userName}</h1>
+                            <h4>${userHandle}</h4>
+                        </div>
+                    </div>
+                    <h3>${userReview}</h3>
+                `;
+                sliderContainer.appendChild(newReview);
+                alert("Thank you for your review! It will be visible after approval.");
+                updateSlider()
+            } else {
+                alert("All fields are required to submit a review.");
+            }
+        });
+    
+        // Initialize slider visibility
+        updateSlider();
+    </script>
+    
+    
+</body>
+</html>
